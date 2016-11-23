@@ -4,6 +4,11 @@ class Data(object):
     """Class meant to represent the data stored in one of the AIM dash's csv data files"""
 
     def __init__(self, file_path):
+        """Initialize and populate object
+        
+        @param - file_path, The name of the file to be loaded if it is in the current directory, the full file path otherwise.
+
+        """
         self.meta_data = {}
         self.data = {}
         self.data_fields = []
@@ -35,10 +40,3 @@ class Data(object):
     def __str__(self):
         return "Data object. \n\nMetadata: \n %s \n\nData Fields: \n %s"\
             % (str(self.meta_data), str(self.data_fields))
-
-
-if __name__ == '__main__':
-    test_data = Data('C:\Users\cyrus\Documents\GitHub\python_data_analysis\sample_data\Autocross_10Hz_Data_2a.csv')
-    print(test_data)
-    print('\n')
-    print(test_data.num_data_entries)
