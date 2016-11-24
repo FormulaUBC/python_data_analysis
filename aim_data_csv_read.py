@@ -11,8 +11,8 @@ class Data(object):
         """
         self.meta_data = {}
         self.data = {}
-        self.data_fields = []
-        self.num_data_entries = 0
+        self._data_fields = []
+        self._num_data_entries = 0
         
         file = open(file_path, 'rb')
         reader = csv.reader(file, delimiter=',')
@@ -23,20 +23,22 @@ class Data(object):
             row = reader.next()
 
         title_row = reader.next()
-        reader.next()
+        reader.next()  # Skip blank line
         unit_row = reader.next()
         channel_id_row = reader.next()
         for i in range(len(title_row)):
             title = title_row[i]
-            self.data_fields.append(title)
+            self._data_fields.append(title)
             self.data[title] = {'unit': unit_row[i], 'channel_id': channel_id_row[i], 'data': []}
 
         reader.next()
         for data_row in reader:
             for i in range(len(data_row)):
                 self.data[title_row[i]]['data'].append(data_row[i])
-                self.num_data_entries += 1
+                self._num_data_entries += 1
+
+        file.close()
 
     def __str__(self):
         return "Data object. \n\nMetadata: \n %s \n\nData Fields: \n %s"\
-            % (str(self.meta_data), str(self.data_fields))
+            % (str(self.meta_data), str(self._data_fields))
