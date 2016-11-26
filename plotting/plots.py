@@ -1,5 +1,4 @@
 import matplotlib.pyplot as plt
-from aim_data_csv_read import Data
 import numpy as np
 
 def plot_ax_vs_t(dat):
